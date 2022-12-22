@@ -8,10 +8,10 @@
 		<version>2.7.6</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.awaliyah.ulvah.movie</groupId>
-	<artifactId>movie</artifactId>
+	<groupId>com.awaliyah.ulvah.producer</groupId>
+	<artifactId>producer</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>movie</name>
+	<name>producer</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>11</java.version>
