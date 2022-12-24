@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface ProducerRepository extends PagingAndSortingRepository<Producer, Long> {
 
-    @Query(value = "SELECT p FROM PRODUCER p WHERE p.winner = true", nativeQuery = true)
+    @Query(value = "SELECT *  FROM PRODUCER WHERE WINNER = TRUE", nativeQuery = true)
     Optional<Producer> findProducerWinner();
 
 }

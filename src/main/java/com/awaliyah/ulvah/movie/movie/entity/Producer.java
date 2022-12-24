@@ -30,10 +30,19 @@ public class Producer {
             strategy = GenerationType.SEQUENCE,
             generator = "movie_sequence"
     )
-    Long id;
-    Integer year;
-    String studios;
-    String producerName;
+    Long producerId;
+    Integer ano;
+    String title;
+    String studio;
+    String producer;
     Boolean winner;
+
+    public Producer(Integer ano, String title, String studio, String producerName, Boolean winner) {
+        this.ano = ano;
+        this.title = title;
+        this.studio = studio;
+        this.producer = producerName;
+        this.winner = winner;
+    }
 
 }

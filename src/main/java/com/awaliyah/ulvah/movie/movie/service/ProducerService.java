@@ -22,9 +22,11 @@ public class ProducerService {
     }
 
     public Producer updateProducer (Producer producer) {
-        Producer retrievedProducer = this.producerRepository.findById(producer.getId()).orElseThrow(
+        Producer retrievedProducer = this.producerRepository.findById(producer.getProducerId()).orElseThrow(
                 () -> new ResourceNotFoundException("Producer Not Found")
         );
+
+
         return this.producerRepository.save(retrievedProducer);
 
     }
@@ -38,12 +40,16 @@ public class ProducerService {
         this.producerRepository.delete(retrievedProducer);
     }
 
-    public Iterable<Producer> fndAllProducers() {
+    public Iterable<Producer> findAllProducers() {
 
         return this.producerRepository.findAll();
     }
 
     public Optional<Producer> findProducerWinner(){
         return this.producerRepository.findProducerWinner();
+    }
+
+    public void saveProducer(Producer producer) {
+        this.producerRepository.save(producer);
     }
 }
