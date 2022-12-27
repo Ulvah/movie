@@ -6,6 +6,7 @@ import com.awaliyah.ulvah.movie.movie.repository.WinnerRepository;
 import com.awaliyah.ulvah.movie.movie.service.ProducerService;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.hibernate.mapping.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -17,7 +18,10 @@ import org.springframework.context.annotation.Bean;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @SpringBootApplication
@@ -46,6 +50,8 @@ public class MovieApplication {
 
 
 			Map<String, Winner> winnerMap = new HashMap<String, Winner>();
+			Map<Integer, Winner> winnerMapSave = new HashMap<Integer, Winner>();
+			List<Integer> intervals = new ArrayList<Integer>();
 			for (CSVRecord record : records) {
 				if (record.getRecordNumber() == 1) {
 					continue;
@@ -67,7 +73,10 @@ public class MovieApplication {
 						if (winnerMap.containsKey(strProducer)) {
 							newWinner = winnerMap.get(strProducer.trim());
 							newWinner.setFollowingWin(ano);
-							winnerRepository.save(newWinner);
+							int inv = ano - newWinner.getPreviousWin();
+							intervals.add(inv);
+							winnerMapSave.put(inv, newWinner);
+							// winnerRepository.save(newWinner);
 						} else {
 							newWinner.setProducer(strProducer);
 							newWinner.setPreviousWin(ano);
@@ -80,6 +89,10 @@ public class MovieApplication {
 				Producer newProducer = new Producer(ano, title, studios, producers, isWinner);
 				this.producerService.saveProducer(newProducer);
 			}
+			int min = Collections.min(intervals);
+			int max = Collections.max(intervals);
+			this.winnerRepository.save(winnerMapSave.get(min));
+			this.winnerRepository.save(winnerMapSave.get(max));
 
 		};
 	}

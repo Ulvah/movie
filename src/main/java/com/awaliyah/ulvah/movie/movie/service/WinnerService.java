@@ -6,6 +6,8 @@ import com.awaliyah.ulvah.movie.movie.repository.WinnerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class WinnerService {
 
@@ -45,4 +47,5 @@ public class WinnerService {
     public void saveWinner(Winner winner) {
         this.winnerRepository.save(winner);
     }
+
 }
