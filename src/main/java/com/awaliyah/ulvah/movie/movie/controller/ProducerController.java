@@ -40,6 +40,7 @@ public class ProducerController {
 
     @PostMapping
     public void registerNewProducer(@RequestBody Producer producer) {
+
         producerService.addNewProducer(producer);
     }
 
@@ -67,4 +68,5 @@ public class ProducerController {
 
         producerService.updateProducer(producerUpdate);
     }
+
 }
