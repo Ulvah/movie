@@ -65,7 +65,7 @@ public class MovieApplication {
 					for (String strProducer : producers.split(",|\\ and ")) {
 						Winner newWinner = new Winner();
 						if (winnerMap.containsKey(strProducer)) {
-							newWinner = winnerMap.get(strProducer);
+							newWinner = winnerMap.get(strProducer.trim());
 							newWinner.setFollowingWin(ano);
 							winnerRepository.save(newWinner);
 						} else {

@@ -44,15 +44,14 @@ public class WinnerController {
     public void updateProducer(
             @PathVariable("winnerId") Long id,
             @RequestParam(required = false) String producerName,
-            @RequestParam(required = false) Integer previousWin,
-            @RequestParam(required = false) Integer followingWin){
+            @RequestParam(required = false) int previousWin,
+            @RequestParam(required = false) int followingWin){
 
         Winner winnerUpdate = new Winner();
         winnerUpdate.setWinnerId(id);
         winnerUpdate.setProducer(producerName);
         winnerUpdate.setPreviousWin(previousWin);
         winnerUpdate.setFollowingWin(followingWin);
-
         winnerService.updateWinner(winnerUpdate);
     }
 }

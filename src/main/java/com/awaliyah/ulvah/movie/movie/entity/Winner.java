@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @Getter
 @Setter
@@ -32,15 +33,21 @@ public class Winner {
     )
     Long winnerId;
     String producer;
-    Integer previousWin;
-    Integer followingWin;
+    int previousWin;
+    int followingWin;
 
-    public Winner(String producerName, Integer previousWin, Integer followingWin) {
+    @Transient
+    int interval;
+
+
+    public Winner(String producerName, int previousWin, int followingWin) {
         this.producer = producerName;
         this.previousWin = previousWin;
         this.followingWin = followingWin;
 
     }
 
-
+    public int getInterval() {
+        return followingWin - previousWin;
+    }
 }
