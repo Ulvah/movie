@@ -19,6 +19,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -67,10 +68,13 @@ public class MovieApplication {
 					isWinner = true;
 				}
 
+				List<String> listaDeProducers = new ArrayList<String>();
 				if (isWinner == true){
-					for (String strProducer : producers.split(",|\\ and ")) {
+					String[] producerArray = producers.split(",|and");
+					listaDeProducers = Arrays.asList(producerArray);
+					for (String strProducer : listaDeProducers) {
 						Winner newWinner = new Winner();
-						if (winnerMap.containsKey(strProducer)) {
+						if (winnerMap.containsKey(strProducer.trim())) {
 							newWinner = winnerMap.get(strProducer.trim());
 							newWinner.setFollowingWin(ano);
 							int inv = ano - newWinner.getPreviousWin();
@@ -78,7 +82,7 @@ public class MovieApplication {
 							winnerMapSave.put(inv, newWinner);
 							// winnerRepository.save(newWinner);
 						} else {
-							newWinner.setProducer(strProducer);
+							newWinner.setProducer(strProducer.trim());
 							newWinner.setPreviousWin(ano);
 							winnerMap.put(strProducer.trim(), newWinner);
 						}
